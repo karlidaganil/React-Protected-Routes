@@ -1,31 +1,26 @@
 import "./App.css";
 
-import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { useSelector } from "react-redux";
 import Home from "./pages/Home";
-import Account from "./pages/Account";
-import Card from "./pages/Card";
+import PrivatePage from "./pages/PrivatePage";
+import PublicPage from "./pages/PublicPage";
 import RequireAuth from "./pages/RequireAuth";
+import Header from "./pages/Header";
+import Login from "./pages/Login";
 
 function App() {
+  const isLoggedIn = useSelector((state) => state.authSlice.isLoggedIn);
   return (
     <div className="App">
       <BrowserRouter>
-        <ul>
-          <li>
-            <Link to="/">Home Page</Link>
-          </li>
-          <li>
-            <Link to="/accounts">Account Page (protected) </Link>
-          </li>
-          <li>
-            <Link to="/cards">Cards Page (unprotected) </Link>
-          </li>
-        </ul>
+        <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route element={<RequireAuth auth={false} />}>
-            <Route path="/accounts" element={<Account />} />
-            <Route path="/cards" element={<Card />} />
+          <Route path="/public-page" element={<PublicPage />} />
+          <Route path="/login-page" element={<Login />} />
+          <Route element={<RequireAuth auth={isLoggedIn} />}>
+            <Route path="/private-page" element={<PrivatePage />} />
           </Route>
         </Routes>
       </BrowserRouter>

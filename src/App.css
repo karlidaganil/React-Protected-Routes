@@ -33,6 +33,17 @@ ul {
   justify-content: space-evenly;
 }
 
+header {
+  width: 100%;
+  height: 100px;
+  background-color: #61dafb;
+  display: flex;
+  justify-content: space-around;
+}
+li {
+  margin: 0px 50px;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
